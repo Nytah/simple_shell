@@ -1,78 +1,133 @@
-.TH SHELL 1 "27 November 2019" GNU "Shell man page"
+.TH hsh 1 "August 12, 2022" "1.0" "hsh General Commands Manual"
+
 .SH NAME
-.B hsh
-- Command line interpreter (shell)
+
+.B simple_shell - hsh
+- command line interpreter or shell
+
+
 .SH SYNOPSIS
-The shell is executed by typing ./hsh
-.br
-Then, it will wait for an input such as : command [arguments] [other]
+
+.B  ./hsh
+.I (no options yet)
+
+
+
 .SH DESCRIPTION
-A shell is a command language interpreter that executes commands read from the standard input or from a file. Our shell does not support the arguments passed to it, yet. We are still working on it.
+
+simple_shell is a command line interpreter, or shell, in the tradition of the first Unix shell written by Ken Thompson. This shell is intentionally minimalistic, yet includes the basic functionality of a traditional Unix-like command line interface. simple_shell is desgined to run on the linux environment.
+
+
+.SH OVERVIEW
+
+Reading from either the terminal or files, simple_shell interprets and executes commands.
+
+
+.SH INVOCATION
+
+Compile simple_shell with the GNU Compiler Collection, preferably using gcc plus the below specified flags, as per this example (note the use of the * wildcard which enables all related .c files to be compiled concurrently):
+.P
+.RS
+.B $ gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
+.P
+.RE
+simple_shell can be run in interactive mode by entering the below command on the command line followd by "enter." Note that the prompt ('$') will appear and you will then be in interactive mode and able to enter commands followed by "enter." 
+.P
+.RS
+.B $ ./hsh
+.P
+.RE
+simple_shell can be run in non-interactive mode through the use of shell scripts. This can involve the use of piping ('|'):
+.P
+.RS
+.B echo 'pwd' | ./hsh
+
+.SH EXECUTABLES
+
+Example of executables:
+.IP
 .br
-.B What hsh can do :
+.\&
+.RS
+\&$ echo "Example of executables"
 .br
-- Executes any command with its arguments
+\&"Example of executables"
 .br
-- Executes built-in commands
+\&$
+
+
+.SH BUILTINS
+
+The following builtin commands are supported:
+
+.IT
+.B env
+- prints the environment variables
+
+.B exit
+- exits the program
+
+.B setenv
+- sets the environment
+
+.B unsetenv
+- removes elements from the environment
+
+Example of builtin command:
+.IP
 .br
-- Handle pipes
+.\&
+.RS
+\&$ env
 .br
-- Handle the command seperator ;
+\&TERM=xterm-256color
 .br
-- Handle && and || logical operators
+\&SHELL=/bin/bash
 .br
-- handle variable replacement
+\&SSH_CLIENT=10.0.2.2 50046 22
 .br
-- handle the $? variable
+\&OLDPWD=/home/vagrant
 .br
-- handle the $$ variable
-.SH BUILT-IN FUNCTIONS
-Those are the available built-in functions :
+\&SSH_TTY=/dev/pts/0
 .br
- - exit : exit the shell
+\&LC_ALL=en_US
 .br
- - cd : Change Directory
+\&USER=vagrant
 .br
- - help : Display the help page
+\&MAIL=/var/mail/vagrant
 .br
- - history : Display history of commands used
+\&PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 .br
- - alias : Put an alias for a command
+\&PWD=/home/vagrant/simple_shell
 .br
- - env : Display the environment variables
-.SH OPTIONS
-There are no options for the moment.
-.SH EXIT STATUS
-The exit value depends on how a function has terminated. Every error is identified by a certain value. On success it will always return 0.
-.SH RETURN VALUE
-Return 0 on success, otherwise it will return the exit value.
-.SH ENVIRONMENT
-- PATH
+\&LANG=en_US.UTF-8
 .br
-- $?
+\&SHLVL=1
 .br
-- $$
+\&HOME=/home/vagrant
+.br
+\&LOGNAME=vagrant
+.br
+\&SSH_CONNECTION=10.0.2.2 50046 10.0.2.15 22
+.br
+\&LESSOPEN=| /usr/bin/lesspipe %s
+.br
+\&LESSCLOSE=/usr/bin/lesspipe %s %s
+br.
+\&_=./hsh
+.br
+\&$
+
+
 .SH BUGS
-There is no known bugs at the moment.
-.SH EXAMPLE
-.B Two ways to execute our shell :
-.br
-.B The intercative mode :
-.br
- $ ./hsh
-.br
- #cisfun$ /bin/ls
-.br
- hsh main.c shell.c
-.br
- #cisfun$ exit
-.br
- $
-.br
-.B The non-interactive mode :
-.br
- $ echo "/bin/ls" | ./hsh
-.br
- hsh main.c shell.c
-.SH AUTHORS
-Jones Mereu, Benita Onwubuya.
+No known bugs at this writing (August 12, 2022).
+Please report any issues to the authors.
+
+.SH AUTHOR
+
+Jones Mereu 
+
+Benita Onwubuya
+
+.SH SEE ALSO
+sh
